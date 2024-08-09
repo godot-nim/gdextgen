@@ -109,7 +109,7 @@ var `varToBytes(Variant)`: PtrUtilityFunction
 var `bytesToVar(PackedByteArray)`: PtrUtilityFunction
 var `varToBytesWithObjects(Variant)`: PtrUtilityFunction
 var `bytesToVarWithObjects(PackedByteArray)`: PtrUtilityFunction
-var `hash(Variant)`: PtrUtilityFunction
+# `hash(Variant)`
 var `instanceFromId(Int)`: PtrUtilityFunction
 var `isInstanceIdValid(Int)`: PtrUtilityFunction
 var `isInstanceValid(Variant)`: PtrUtilityFunction
@@ -475,11 +475,6 @@ proc bytesToVarWithObjects*(bytes: PackedByteArray): Variant =
   let ptrargs = [getPtr bytes]
   `bytesToVarWithObjects(PackedByteArray)`(getPtr result, addr ptrargs[0], argslen)
 
-proc hash*(variable: Variant): Int =
-  const argslen = cint 1
-  let ptrargs = [getPtr variable]
-  `hash(Variant)`(getPtr result, addr ptrargs[0], argslen)
-
 proc instanceFromId*(instanceId: Int): GodotClass =
   const argslen = cint 1
   let ptrargs = [getPtr instanceId]
@@ -641,8 +636,6 @@ proc load* =
   `varToBytesWithObjects(Variant)` = interfaceVariantGetPtrUtilityFunction(getPtr proc_name, 2947269930)
   proc_name = stringName "bytes_to_var_with_objects"
   `bytesToVarWithObjects(PackedByteArray)` = interfaceVariantGetPtrUtilityFunction(getPtr proc_name, 4249819452)
-  proc_name = stringName "hash"
-  `hash(Variant)` = interfaceVariantGetPtrUtilityFunction(getPtr proc_name, 326422594)
   proc_name = stringName "instance_from_id"
   `instanceFromId(Int)` = interfaceVariantGetPtrUtilityFunction(getPtr proc_name, 1156694636)
   proc_name = stringName "is_instance_id_valid"
